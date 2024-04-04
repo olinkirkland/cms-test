@@ -28,7 +28,6 @@ axios.defaults.baseURL = 'https://strapi-production-439d.up.railway.app/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 const posts = ref([] as Post[]);
 const showJSON = ref(false);
-const uploads = ref([] as any[]);
 // @keydown.enter="showJSON = !showJSON"
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') showJSON.value = !showJSON.value;

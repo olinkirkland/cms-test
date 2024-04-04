@@ -29,7 +29,12 @@ interface ListBlock {
   children: Array<ListItemBlock>;
 }
 
-export type MarkdownBlock = ParagraphBlock | ListBlock;
+interface QuoteBlock {
+  type: 'quote';
+  children: Array<TextNode>;
+}
+
+export type MarkdownBlock = ParagraphBlock | ListBlock | QuoteBlock;
 
 export function markdownJSONToHTML(markdown: MarkdownBlock[]): string {
   let html: string[] = [];
@@ -59,26 +64,25 @@ export function markdownJSONToHTML(markdown: MarkdownBlock[]): string {
         });
         html.push('</p>');
         break;
+      case 'quote':
+        html.push('<blockquote>');
+        block.children.forEach((child) => {
+          if (child.type === 'text') html.push(child.text);
+        });
+        html.push('</blockquote>');
+        break;
       case 'list':
-        if (block.format === 'unordered') {
-          html.push('<ul>');
-        } else if (block.format === 'ordered') {
-          html.push('<ol>');
-        }
+        if (block.format === 'unordered') html.push('<ul>');
+        else if (block.format === 'ordered') html.push('<ol>');
         block.children.forEach((listItem) => {
           html.push('<li>');
           listItem.children.forEach((listItemChild) => {
-            if (listItemChild.type === 'text') {
-              html.push(listItemChild.text);
-            }
+            if (listItemChild.type === 'text') html.push(listItemChild.text);
           });
           html.push('</li>');
         });
-        if (block.format === 'unordered') {
-          html.push('</ul>');
-        } else if (block.format === 'ordered') {
-          html.push('</ol>');
-        }
+        if (block.format === 'unordered') html.push('</ul>');
+        else if (block.format === 'ordered') html.push('</ol>');
         break;
     }
   });

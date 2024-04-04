@@ -4,7 +4,12 @@
       <li v-for="post in posts">
         <h2>{{ post.title }}</h2>
         <p class="slug">{{ post.slug }}</p>
-        <div class="body" v-html="markdownJSONToHTML(post.body)"></div>
+        <div
+          v-if="!showJSON"
+          class="body"
+          v-html="markdownJSONToHTML(post.body)"
+        ></div>
+        <pre v-else>{{ JSON.stringify(post, null, 2) }}</pre>
       </li>
     </ul>
   </div>
@@ -22,6 +27,11 @@ const token =
 axios.defaults.baseURL = 'https://strapi-production-439d.up.railway.app/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 const posts = ref([] as Post[]);
+const showJSON = ref(false);
+// @keydown.enter="showJSON = !showJSON"
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') showJSON.value = !showJSON.value;
+});
 
 (async () => {
   const { data } = (await (await axios.get('/posts')).data) as { data: any[] };
@@ -83,6 +93,12 @@ ul.posts-list {
 
       :deep(ol > li) {
         list-style-type: decimal;
+      }
+
+      :deep(blockquote) {
+        border-left: 0.4rem solid var(--primary);
+        padding-left: 1.2rem;
+        font-size: 2rem;
       }
     }
   }

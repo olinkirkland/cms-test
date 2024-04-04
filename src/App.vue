@@ -28,6 +28,7 @@ axios.defaults.baseURL = 'https://strapi-production-439d.up.railway.app/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 const posts = ref([] as Post[]);
 const showJSON = ref(false);
+const uploads = ref([] as any[]);
 // @keydown.enter="showJSON = !showJSON"
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') showJSON.value = !showJSON.value;
@@ -60,6 +61,7 @@ ul.posts-list {
 
     > h2 {
       text-align: center;
+      font-size: 4rem;
       margin-bottom: 1.2rem;
       font-family: var(--title-font);
     }
@@ -96,8 +98,9 @@ ul.posts-list {
       }
 
       :deep(blockquote) {
-        border-left: 0.4rem solid var(--primary);
-        padding-left: 1.2rem;
+        border-left: 0.8rem solid var(--dark);
+        padding-left: 2rem;
+        margin-left: 0.8rem;
         font-size: 2rem;
       }
     }

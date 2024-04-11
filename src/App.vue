@@ -105,7 +105,10 @@ ul.posts-list {
       }
 
       :deep(img) {
-        max-width: 100%;
+        display: block;
+        max-width: 24rem;
+        width: 100%;
+        margin: 0 auto;
         height: auto;
         border-radius: 5px;
         overflow: hidden;

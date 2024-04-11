@@ -37,7 +37,20 @@ interface QuoteBlock {
 interface ImageNode {
   type: 'image';
   image: {
-    url: string;
+    formats: {
+      thumbnail: {
+        url: string;
+      };
+      small: {
+        url: string;
+      };
+      medium: {
+        url: string;
+      };
+      large: {
+        url: string;
+      };
+    };
   };
 }
 
@@ -93,7 +106,7 @@ export function markdownJSONToHTML(markdown: MarkdownBlock[]): string {
         break;
 
       case 'image':
-        const { url } = block.image;
+        const { url } = block.image.formats.medium;
         console.log('image', url);
         html.push('<img src="' + url + '" />');
         break;

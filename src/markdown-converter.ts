@@ -34,7 +34,14 @@ interface QuoteBlock {
   children: Array<TextNode>;
 }
 
-export type MarkdownBlock = ParagraphBlock | ListBlock | QuoteBlock;
+interface ImageNode {
+  type: 'image';
+  image: {
+    url: string;
+  };
+}
+
+export type MarkdownBlock = ParagraphBlock | ListBlock | QuoteBlock | ImageNode;
 
 export function markdownJSONToHTML(markdown: MarkdownBlock[]): string {
   let html: string[] = [];
@@ -83,6 +90,12 @@ export function markdownJSONToHTML(markdown: MarkdownBlock[]): string {
         });
         if (block.format === 'unordered') html.push('</ul>');
         else if (block.format === 'ordered') html.push('</ol>');
+        break;
+
+      case 'image':
+        const { url } = block.image;
+        console.log('image', url);
+        html.push('<img src="' + url + '" />');
         break;
     }
   });

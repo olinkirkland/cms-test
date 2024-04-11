@@ -37,6 +37,7 @@ document.addEventListener('keydown', (e) => {
   const { data } = (await (await axios.get('/posts')).data) as { data: any[] };
   posts.value = data.map((d) => {
     const { slug, title, body } = d.attributes;
+    console.log(body);
     return { id: d.id, slug, title, body };
   });
 })();
@@ -101,6 +102,14 @@ ul.posts-list {
         padding-left: 2rem;
         margin-left: 0.8rem;
         font-size: 2rem;
+      }
+
+      :deep(img) {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
       }
     }
   }

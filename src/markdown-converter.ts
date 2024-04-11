@@ -106,9 +106,9 @@ export function markdownJSONToHTML(markdown: MarkdownBlock[]): string {
         break;
 
       case 'image':
-        const { url } = block.image.formats.medium;
-        console.log('image', url);
+        const { url } = block.image.formats.thumbnail;
         html.push('<img src="' + url + '" />');
+        console.log(block);
         break;
     }
   });

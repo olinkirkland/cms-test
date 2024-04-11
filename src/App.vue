@@ -23,7 +23,7 @@ import { Post } from './types';
 
 // Axios setup
 const token =
-  '399b6040045dab1d1cefa88bf41686595c48208b9d4da3d0a430ebd3d7220837dd682e9cabbcc034deb4ba850c344babf4aa6afe6fc939566d75ca40329a5149fcaa69589ffa438ad49dd4ec313d5c72e6fef2c4bcf3059115802efa775dc04cb6647c2c25ad41befeeb9e1fe5d6ef37d8efca9e329dc8808a5764055b5ff47b';
+  '60c88f73fa67d18524fc36c6be3793be35a65138c035a9697a0d940583301b96979da122e0b40cd4ff7aa614987d838093110189b9004feee2ee774777f7a297abf224fcf3ea558508ace922b83646d57f77b918a5a00c699b52eedfce31d7c5d897339155c9c9078f91131b910a77f51786a26ea30b3e3f1bfdfc1932e6c0b8';
 axios.defaults.baseURL = 'https://strapi-production-439d.up.railway.app/api';
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 const posts = ref([] as Post[]);

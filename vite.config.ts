@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
   plugins: [vue()],
   server: { host: false }, // For external IP access
-  base: '/ian-kirkland',
+  base: '/cms-test',
   resolve: {
     alias: {
       '@': '/src'
